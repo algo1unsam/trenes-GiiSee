@@ -1,0 +1,66 @@
+import trenes.*
+import Vagones.*
+import Formaciones.*
+import Deposito.*
+
+describe "test Trenes" {
+
+	var formacion = new Formacion()
+	var vagonPasajero = new VagonDePasajero()
+	var vagonCarga = new VagonDeCarga()
+	var locomotora = new Locomotora()
+	
+
+	test "Una formacion tiene 320 pasajeros" {
+		
+		formacion.agregar(vagonPasajero)
+		assert.equals(320, formacion.totalDePasajeros())
+	}
+
+	/*test "Una formacion tiene carga livina" {
+		
+		vagonPasajero.largo(40)
+		formacion.agregar(vagonCarga)
+		assert.that(formacion.esLiviano())
+	}*/
+	
+	
+
+test "la locomotora no es eficiente"{
+	
+	formacion.agregar(vagonPasajero)
+	formacion.agregar(vagonCarga)
+	formacion.agregarLocomotora(locomotora)
+	
+	assert.notThat(formacion.eficiente())
+	
+}
+
+test "la formacion puede moverse"{
+	
+	formacion.agregar(vagonPasajero)
+	formacion.agregar(vagonCarga)
+	formacion.agregarLocomotora(locomotora)
+	assert.that(formacion.enMovimiento())
+	
+}
+
+test " La locomotora no necesita kilos para estar en movimiento"{
+	
+	formacion.agregar(vagonPasajero)
+    formacion.agregar(vagonCarga)	
+	formacion.agregarLocomotora(locomotora)
+	locomotora.peso(10)
+	assert.equals(0,formacion.kilosNecesariosParaMoverse())
+}
+
+test "El total de vagones y locomotoras es: 3"{
+	
+	formacion.agregar(vagonPasajero)
+	formacion.agregar(vagonCarga)	
+	formacion.agregarLocomotora(locomotora)
+	assert.equals(3, formacion.cantidadElementos())
+	
+   }
+}
+
