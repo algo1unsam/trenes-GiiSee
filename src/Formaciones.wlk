@@ -3,8 +3,11 @@ class Formacion {
 	var vagones = []
 	var locomotoras = []
 
-	method agregar(unVagon) {
-		vagones.add(unVagon)
+	method agregarVagonPasajero(unVagonPasajero) {
+		vagones.add(unVagonPasajero)
+	}
+	method agregarVagonCarga(unVagonCarga) {
+		vagones.add(unVagonCarga)
 	}
 
 	method agregarLocomotora(unaLocomotora) {
@@ -15,10 +18,10 @@ class Formacion {
 		return vagones.sum({ vagon => vagon.cantPasajerosMaximo() })
 	}
 
-	method esLiviano() = vagones.filter({ vagon => vagon.peso() < 2500 })
+	method esLiviano() {return  vagones.filter({ vagon => vagon.pesoMaximo() < 2500 })}
 
 	method velocidadMax() {
-		return locomotora.min({ locomotora => locomotora.velocidadMax() })
+		return locomotora.max({ locomotora => locomotora.velocidadMax() })
 	}
 
 	method eficiente() {
@@ -46,7 +49,7 @@ class Formacion {
 	}
 
 	method vagonMasPesado() {
-		return vagones.max{ vagon => vagon.peso() }
+		return vagones.max{ vagon => vagon.pesoMaximo() }
 	}
 
 	method pesoTotalLocomotoras() {
@@ -72,6 +75,34 @@ class Formacion {
 	method formacionCompleja() {
 		return self.complejidadPorPeso() || self.complejidadPorTamanio()
 	}
+}
+class LargaDistancia inherits Formacion {
+
+	var origen = true
+	var destino = true
+
+	
+method velocidadLimite() {
+		if (destino && origen) {
+			return 200
+		} else {
+			return 150
+		}
+	}
+
+	method velocidadMaxima() {
+		return self.velocidadMaxima().min(self.velocidadLimite())
+	}
 
 }
+
+class CortaDistancia inherits Formacion {
+
+
+	method formacionBienArmada() {
+		return (self.formacionCompleja()) && self.enMovimiento()
+	}
+
+}
+
 
