@@ -3,7 +3,7 @@ import trenes.*
 import Vagones.*
 import Formaciones.*
 
-describe "test Deposito4" {
+describe "test Deposito" {
 
 	var deposito = new Deposito()
 	var formacion = new Formacion()
