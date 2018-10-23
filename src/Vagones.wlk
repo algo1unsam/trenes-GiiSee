@@ -6,7 +6,7 @@ class VagonDePasajero {
 
 	method cantPasajerosMaximo() {
 		if (self.anchoUtil() <= 2.5) {
-			return  largo * 8
+			return largo * 8
 		} else {
 			return largo * 10
 		}
@@ -19,6 +19,7 @@ class VagonDePasajero {
 	method pesoMaximo() {
 		return self.cantDePasajeros() * 80
 	}
+
 }
 
 class VagonDeCarga {
