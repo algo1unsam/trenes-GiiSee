@@ -3,36 +3,33 @@ import trenes.*
 import Vagones.*
 import Formaciones.*
 
-
 describe "test Deposito4" {
 
-    var deposito = new Deposito()
-	var formacion = new Formacion() 
+	var deposito = new Deposito()
+	var formacion = new Formacion()
 	var formacion1 = new Formacion()
 	var vagonPasajero = new VagonDePasajero()
 	var vagonCarga = new VagonDeCarga()
 	var locomotora = new Locomotora()
 
-test "Los vagones mas pesados es uno de carga y otro de pasajeros"{
-	
-	formacion1.agregarVagonCarga(vagonCarga)
-	formacion.agregarVagonPasajero(vagonPasajero)
-	deposito.agregarFormacion(formacion)
-	deposito.agregarFormacion(formacion1)	
-	formacion.agregarLocomotora(locomotora)
-	
-	assert.equals([vagonPasajero, vagonCarga], deposito.VagonesMasPesados())
+	test "Los vagones mas pesados es uno de carga y otro de pasajeros" {
+		formacion.agregarVagonCarga(vagonCarga)
+		formacion.agregarVagonPasajero(vagonPasajero)
+		deposito.agregarFormacion(formacion)
+		deposito.agregarFormacion(formacion1)
+		formacion.agregarLocomotora(locomotora)
+		assert.equals([ vagonPasajero, vagonCarga ], deposito.VagonesMasPesados())
+	}
+
+	test "El deposito no tiene un conductor con experiencia" {
+		formacion.agregarVagonPasajero(vagonPasajero)
+		deposito.agregarFormacion(formacion)
+		formacion.agregarVagonPasajero(vagonPasajero)
+		formacion.agregarVagonPasajero(vagonPasajero)
+		formacion.agregarVagonPasajero(vagonPasajero)
+		formacion.agregarLocomotora(locomotora)
+		assert.notThat(deposito.conductorConExperiencia())
+	}
+
 }
 
-test "El deposito no tiene un conductor con experiencia"{
-	
-	formacion.agregarVagonPasajero(vagonPasajero)
-	deposito.agregarFormacion(formacion)
-	formacion.agregarVagonPasajero(vagonPasajero)
-	formacion.agregarVagonPasajero(vagonPasajero)
-	formacion.agregarVagonPasajero(vagonPasajero)
-	formacion.agregarLocomotora(locomotora)
-	
-	assert.notThat(deposito.conductorConExperiencia())
-  }
-}
